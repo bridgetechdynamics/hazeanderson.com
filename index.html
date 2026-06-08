@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Haze Anderson | Electronic Visionary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body data-page="index">
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="site-nav">
+          <span class="brand">HAZE</span>
+          <div class="nav-links">
+            <a href="index.html" data-page="index">Home</a>
+            <a href="channels.html" data-page="channels">Channels</a>
+            <a href="contact.html" data-page="contact">Contact</a>
+          </div>
+        </nav>
+        <div class="hero-content">
+          <p class="hero-kicker">Electronic Music / Immersive Live Sets</p>
+          <h1 class="hero-title">Haze Anderson crafts neon soundscapes for the midnight hour.</h1>
+          <p class="hero-subtitle">
+            Mixing analog heat, modular depth, and cinematic storytelling, his music moves bodies on
+            streamers and stages around the globe. Dive into brand-new releases, live studio
+            sessions, and interactive sonic toys.
+          </p>
+          <div class="cta-group">
+            <a href="https://hazeanderson.bandcamp.com" target="_blank" rel="noreferrer">Listen on Bandcamp</a>
+            <a href="https://www.youtube.com/hazeanderson" target="_blank" rel="noreferrer">Watch the latest set</a>
+            <a href="https://www.twitch.tv/hazeanderson" target="_blank" rel="noreferrer">Join the stream</a>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section class="section-panel">
+          <h2>Current Mood</h2>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>New EP: "Signal Bloom"</h3>
+              <p>Four woven tracks, modular bass, and vapor-lit atmospheres ready to soundtrack your night.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Studio Rituals</h3>
+              <p>Weekly build updates show synthesis experiments, sidechained textures, and live patch notes.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Immersive Live</h3>
+              <p>Hybrid DJ sets and live coding provide the kind of energy that only real-time soundscapes achieve.</p>
+            </article>
+          </div>
+        </section>
+        <section class="section-panel">
+          <h2>Featured Channels</h2>
+          <div class="channels-preview">
+            <article class="channel-card">
+              <strong>Youtube</strong>
+              <h3>Cinematic rigs &amp; visuals</h3>
+              <p>Guided live sessions, gear walkthroughs, and archive footage from rooftop shows.</p>
+              <a href="https://www.youtube.com/hazeanderson" target="_blank" rel="noreferrer">Visit channel</a>
+            </article>
+            <article class="channel-card">
+              <strong>Bandcamp</strong>
+              <h3>Deep catalog</h3>
+              <p>High-fidelity downloads, vinyl-first editions, and collaborative remixes for collectors.</p>
+              <a href="https://hazeanderson.bandcamp.com" target="_blank" rel="noreferrer">Listen now</a>
+            </article>
+            <article class="channel-card">
+              <strong>Twitch</strong>
+              <h3>Live studio</h3>
+              <p>Modular jams, chat-driven patches, and community-driven pay-what-you-can links.</p>
+              <a href="https://www.twitch.tv/hazeanderson" target="_blank" rel="noreferrer">Catch the next stream</a>
+            </article>
+          </div>
+        </section>
+        <section class="section-panel vco-panel">
+          <h2>Interactive VCO Lab</h2>
+          <p>Play with a virtual analog oscillator that reacts to waveform choice, pitch, and an onboard LFO.</p>
+          <div class="vco-grid">
+            <div class="vco-column">
+              <h3>VCO1</h3>
+              <div class="vco-controls">
+                <div class="control">
+                  <label for="vco1-pitch">Pitch (Hz)</label>
+                  <input id="vco1-pitch" type="range" min="110" max="880" value="330" />
+                  <span id="vco1-pitch-value">330 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="vco1-volume">Volume</label>
+                  <input id="vco1-volume" type="range" min="0" max="1" step="0.01" value="0.45" />
+                  <span id="vco1-volume-value">45%</span>
+                </div>
+                <div class="control">
+                  <label for="vco1-wave">Waveform</label>
+                  <div class="wave-buttons" role="group" aria-label="VCO1 waveform select" data-wave-group="vco1">
+                    <button type="button" data-wave="sine" class="active">Sine</button>
+                    <button type="button" data-wave="square">Square</button>
+                    <button type="button" data-wave="triangle">Triangle</button>
+                    <button type="button" data-wave="sawtooth">Sawtooth</button>
+                  </div>
+                </div>
+                <div class="control">
+                  <label for="vco1-lfo-rate">LFO rate (Hz)</label>
+                  <input id="vco1-lfo-rate" type="range" min="0.1" max="6" step="0.1" value="1.2" />
+                  <span id="vco1-lfo-rate-value">1.2 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="vco1-lfo-depth">LFO depth</label>
+                  <input id="vco1-lfo-depth" type="range" min="0" max="220" value="88" />
+                  <span id="vco1-lfo-depth-value">88 Hz</span>
+                </div>
+                <div class="control">
+                  <label class="lfo-row">
+                    <span>LFO active</span>
+                    <input id="vco1-lfo-toggle" type="checkbox" checked />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="vco-column">
+              <h3>VCO2</h3>
+              <div class="vco-controls">
+                <div class="control">
+                  <label for="vco2-pitch">Pitch (Hz)</label>
+                  <input id="vco2-pitch" type="range" min="110" max="880" value="220" />
+                  <span id="vco2-pitch-value">220 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="vco2-volume">Volume</label>
+                  <input id="vco2-volume" type="range" min="0" max="1" step="0.01" value="0.3" />
+                  <span id="vco2-volume-value">30%</span>
+                </div>
+                <div class="control">
+                  <label for="vco2-wave">Waveform</label>
+                  <div class="wave-buttons" role="group" aria-label="VCO2 waveform select" data-wave-group="vco2">
+                    <button type="button" data-wave="sine" class="active">Sine</button>
+                    <button type="button" data-wave="square">Square</button>
+                    <button type="button" data-wave="triangle">Triangle</button>
+                    <button type="button" data-wave="sawtooth">Sawtooth</button>
+                  </div>
+                </div>
+                <div class="control">
+                  <label for="vco2-lfo-rate">LFO rate (Hz)</label>
+                  <input id="vco2-lfo-rate" type="range" min="0.1" max="6" step="0.1" value="0.8" />
+                  <span id="vco2-lfo-rate-value">0.8 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="vco2-lfo-depth">LFO depth</label>
+                  <input id="vco2-lfo-depth" type="range" min="0" max="220" value="60" />
+                  <span id="vco2-lfo-depth-value">60 Hz</span>
+                </div>
+                <div class="control">
+                  <label class="lfo-row">
+                    <span>LFO active</span>
+                    <input id="vco2-lfo-toggle" type="checkbox" checked />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="control">
+            <label for="cross-mod">Cross modulation amount</label>
+            <input id="cross-mod" type="range" min="0" max="1" step="0.01" value="0.2" />
+            <span id="cross-mod-value">20%</span>
+          </div>
+          <button id="vco-toggle" type="button">Start VCOs</button>
+        </section>
+        <section class="section-panel">
+          <h2>Live Signal</h2>
+          <p>
+            Haze broadcasts every Friday at 9:00 PM CST. Expect vintage synths, chaotic polyrhythms, and
+            impromptu listener patch requests. Subscribe to the newsletter for exclusive backstage mixes.
+          </p>
+        </section>
+      </main>
+      <footer class="footer">
+        <p>© 2026 Haze Anderson. Crafted with luminous analog warmth.</p>
+      </footer>
+    </div>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/vco.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Haze Anderson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body data-page="contact">
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="site-nav">
+          <span class="brand">HAZE</span>
+          <div class="nav-links">
+            <a href="index.html" data-page="index">Home</a>
+            <a href="channels.html" data-page="channels">Channels</a>
+            <a href="contact.html" data-page="contact">Contact</a>
+          </div>
+        </nav>
+        <div class="hero-content">
+          <h1 class="hero-title">Let's sync up</h1>
+          <p class="hero-subtitle">Share a project, booking request, or studio collaboration idea and Haze will respond within a few beats.</p>
+        </div>
+      </header>
+      <main>
+        <section class="contact-grid">
+          <div class="contact-card">
+            <h2>Overview</h2>
+            <p>Use this form for bookings, remix inquiries, or sound-design collaborations. Every message is read personally before the next stream.</p>
+            <p>Prefer to reach out via socials? DM on Instagram or drop a note on Twitch chat during Friday streams.</p>
+            <ul>
+              <li>Booking inquiries: 6-8 week lead time</li>
+              <li>Collabs/remix requests: share stems and vision</li>
+              <li>Sponsors/partnerships: mention your alignment to analog-first sound</li>
+            </ul>
+          </div>
+          <form class="contact-form" method="POST" action="https://formslist.com/haze-anderson">
+            <h2>Send a note</h2>
+            <div class="form-control">
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-control">
+              <label for="email">Email</label>
+              <input id="email" type="email" name="email" placeholder="you@email.com" required />
+            </div>
+            <div class="form-control">
+              <label for="reason">Reason</label>
+              <select id="reason" name="reason">
+                <option value="booking">Booking / tour</option>
+                <option value="collab">Collaboration</option>
+                <option value="remix">Remix / sample</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-control">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project"></textarea>
+            </div>
+            <div class="form-control">
+              <button type="submit">Send message</button>
+              <small>Powered by formslist.com; action URL can be updated when ready.</small>
+            </div>
+          </form>
+        </section>
+      </main>
+      <footer class="footer">
+        <p>© 2026 Haze Anderson. Form submissions routed securely.</p>
+      </footer>
+    </div>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
