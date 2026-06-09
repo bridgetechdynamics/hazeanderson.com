@@ -1,12 +1,14 @@
 (function () {
   const vcoDescriptors = [
-    { prefix: 'vco1', defaults: { pitch: 330, volume: 0.45, lfoRate: 1.2, lfoDepth: 88 } },
-    { prefix: 'vco2', defaults: { pitch: 220, volume: 0.3, lfoRate: 0.8, lfoDepth: 60 } },
+    { prefix: 'vco1' },
+    { prefix: 'vco2' },
   ];
 
   const crossModSlider = document.getElementById('cross-mod');
   const crossModValue = document.getElementById('cross-mod-value');
   if (!crossModSlider || !crossModValue) return;
+
+  const syncToggle = document.getElementById('vco2-sync-toggle');
 
   const vcos = vcoDescriptors.map((descriptor) => {
     const pitchSlider = document.getElementById(`${descriptor.prefix}-pitch`);
@@ -20,6 +22,7 @@
     const lfoToggle = document.getElementById(`${descriptor.prefix}-lfo-toggle`);
     const waveButtonsContainer = document.querySelector(`.wave-buttons[data-wave-group="${descriptor.prefix}"]`);
     const toggleButton = document.getElementById(`${descriptor.prefix}-toggle`);
+
     if (
       !pitchSlider ||
       !pitchValue ||
@@ -40,7 +43,6 @@
 
     return {
       prefix: descriptor.prefix,
-      defaults: descriptor.defaults,
       pitchSlider,
       pitchValue,
       volumeSlider,
@@ -51,12 +53,13 @@
       lfoDepthValue,
       lfoToggle,
       waveButtons,
-      oscillator: null,
+      toggleButton,
       gainNode: null,
+      oscillator: null,
       lfo: null,
       lfoGain: null,
-      toggleButton,
       playing: false,
+      lfoStarted: false,
     };
   });
 
@@ -65,66 +68,79 @@
   const CROSS_MOD_MAX = 220;
   let audioCtx;
   let crossGain;
-  let started = false;
+  let syncTimer = null;
 
   const ensureAudio = () => {
     if (audioCtx) return;
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     crossGain = audioCtx.createGain();
 
-    vcos.forEach((state, index) => {
-      const oscillator = audioCtx.createOscillator();
+    vcos.forEach((state) => {
       const gainNode = audioCtx.createGain();
+      gainNode.gain.value = 0;
+      gainNode.connect(audioCtx.destination);
+
       const lfo = audioCtx.createOscillator();
       const lfoGain = audioCtx.createGain();
-
-      oscillator.type = 'sine';
-      oscillator.frequency.value = Number(state.pitchSlider.value);
-      gainNode.gain.value = 0;
 
       lfo.type = 'sine';
       lfo.frequency.value = Number(state.lfoRateSlider.value);
       lfoGain.gain.value = state.lfoToggle.checked ? Number(state.lfoDepthSlider.value) : 0;
 
-      oscillator.connect(gainNode).connect(audioCtx.destination);
-      lfo.connect(lfoGain).connect(oscillator.frequency);
+      lfo.connect(lfoGain);
 
-      state.oscillator = oscillator;
       state.gainNode = gainNode;
       state.lfo = lfo;
       state.lfoGain = lfoGain;
-
-      state.waveButtons.forEach((button) => {
-        if (button.classList.contains('active')) {
-          oscillator.type = button.dataset.wave;
-        }
-        button.addEventListener('click', () => {
-          state.waveButtons.forEach((btn) => btn.classList.remove('active'));
-          button.classList.add('active');
-          oscillator.type = button.dataset.wave;
-        });
-      });
-
     });
-
-    if (vcos[1] && vcos[0]) {
-      const v1 = vcos[0];
-      const v2 = vcos[1];
-      crossGain.disconnect();
-      v2.oscillator.connect(crossGain);
-      crossGain.connect(v1.oscillator.frequency);
-    }
-
-    updateCrossMod();
   };
 
-  const startOscillators = () => {
-    if (started) return;
-    vcos.forEach((state) => {
-      state.oscillator.start();
+  const getActiveWave = (state) => {
+    const active = state.waveButtons.find((btn) => btn.classList.contains('active'));
+    return (active && active.dataset.wave) || 'sine';
+  };
+
+  const setupCrossModRouting = () => {
+    if (!crossGain || !audioCtx) return;
+    crossGain.disconnect();
+    if (vcos[1].oscillator) {
+      vcos[1].oscillator.connect(crossGain);
+    }
+    if (vcos[0].oscillator) {
+      crossGain.connect(vcos[0].oscillator.frequency);
+    }
+  };
+
+  const recreateOscillator = (state) => {
+    if (!audioCtx || !state.gainNode) return;
+    if (state.oscillator) {
+      try {
+        state.oscillator.stop();
+      } catch (error) {
+        // ignored
+      }
+      state.oscillator.disconnect();
+    }
+
+    const oscillator = audioCtx.createOscillator();
+    oscillator.type = getActiveWave(state);
+    oscillator.frequency.setValueAtTime(Number(state.pitchSlider.value), audioCtx.currentTime);
+
+    oscillator.connect(state.gainNode);
+    state.lfoGain.disconnect();
+    state.lfoGain.connect(oscillator.frequency);
+
+    state.oscillator = oscillator;
+    oscillator.start();
+
+    setupCrossModRouting();
+  };
+
+  const startLfo = (state) => {
+    if (!state.lfoStarted) {
       state.lfo.start();
-    });
-    started = true;
+      state.lfoStarted = true;
+    }
   };
 
   const updatePitch = (state) => {
@@ -132,6 +148,9 @@
     state.pitchValue.textContent = `${Math.round(freq)} Hz`;
     if (state.oscillator && audioCtx) {
       state.oscillator.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.05);
+    }
+    if (state.prefix === 'vco1') {
+      scheduleSync();
     }
   };
 
@@ -149,6 +168,9 @@
     state.lfoRateValue.textContent = `${rate.toFixed(1)} Hz`;
     if (state.lfo && audioCtx) {
       state.lfo.frequency.setTargetAtTime(rate, audioCtx.currentTime, 0.05);
+    }
+    if (state.prefix === 'vco1') {
+      scheduleSync();
     }
   };
 
@@ -169,7 +191,7 @@
     }
   };
 
-  function updateCrossMod() {
+  const updateCrossMod = () => {
     const amount = Number(crossModSlider.value);
     crossModValue.textContent = `${Math.round(amount * 100)}%`;
     if (crossGain && audioCtx) {
@@ -177,17 +199,62 @@
     }
   };
 
-  crossModSlider.addEventListener('input', updateCrossMod);
+  const clearSync = () => {
+    if (syncTimer) {
+      clearTimeout(syncTimer);
+      syncTimer = null;
+    }
+  };
+
+  const resetVco2Cycle = () => {
+    if (!syncToggle?.checked || !vcos[0].playing || !vcos[1].playing) {
+      return;
+    }
+    recreateOscillator(vcos[1]);
+    setPlaying(vcos[1], true);
+  };
+
+  const scheduleSync = () => {
+    clearSync();
+    if (
+      !syncToggle?.checked ||
+      !vcos[0].playing ||
+      !vcos[1].playing ||
+      !vcos[0].oscillator ||
+      !audioCtx
+    ) {
+      return;
+    }
+
+    const freq = Math.max(Number(vcos[0].pitchSlider.value), 0.1);
+    const period = 1 / freq;
+    syncTimer = setTimeout(() => {
+      resetVco2Cycle();
+      scheduleSync();
+    }, period * 1000);
+  };
 
   const setPlaying = (state, shouldPlay) => {
     state.playing = shouldPlay;
+    if (shouldPlay) {
+      ensureAudio();
+      startLfo(state);
+      recreateOscillator(state);
+    }
     updateVolume(state);
     if (state.toggleButton) {
       state.toggleButton.textContent = shouldPlay
         ? `Stop ${state.prefix.toUpperCase()}`
         : `Start ${state.prefix.toUpperCase()}`;
     }
+    if (shouldPlay) {
+      scheduleSync();
+    } else {
+      clearSync();
+    }
   };
+
+  crossModSlider.addEventListener('input', updateCrossMod);
 
   vcos.forEach((state) => {
     state.pitchSlider.addEventListener('input', () => updatePitch(state));
@@ -195,14 +262,28 @@
     state.lfoRateSlider.addEventListener('input', () => updateLfoRate(state));
     state.lfoDepthSlider.addEventListener('input', () => updateLfoDepth(state));
     state.lfoToggle.addEventListener('change', () => updateLfoToggle(state));
+
+    state.waveButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        state.waveButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+        if (state.oscillator) {
+          state.oscillator.type = button.dataset.wave;
+        }
+      });
+    });
+
     state.toggleButton.addEventListener('click', async () => {
       ensureAudio();
       if (audioCtx && audioCtx.state === 'suspended') {
         await audioCtx.resume();
       }
-      startOscillators();
       setPlaying(state, !state.playing);
     });
+  });
+
+  syncToggle?.addEventListener('change', () => {
+    scheduleSync();
   });
 
   updateCrossMod();
@@ -211,6 +292,5 @@
     updateVolume(state);
     updateLfoRate(state);
     updateLfoDepth(state);
-    setPlaying(state, false);
   });
 })();

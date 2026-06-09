@@ -232,6 +232,12 @@ main {
   margin-top: 1.5rem;
 }
 
+.vco-sync-wrapper {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
 .vco-start {
   width: 100%;
   border: none;

@@ -159,17 +159,23 @@
                 <input id="vco2-lfo-depth" type="range" min="0" max="220" value="60" />
                 <span id="vco2-lfo-depth-value">60 Hz</span>
               </div>
-              <div class="control">
+                <div class="control">
+                  <label class="lfo-row">
+                    <span>LFO active</span>
+                    <input id="vco2-lfo-toggle" type="checkbox" checked />
+                  </label>
+                </div>
+              </div>
+              <div class="vco-start-wrapper">
+                <button type="button" id="vco2-toggle" class="vco-start" data-vco="vco2">Start VCO2</button>
+              </div>
+              <div class="vco-sync-wrapper">
                 <label class="lfo-row">
-                  <span>LFO active</span>
-                  <input id="vco2-lfo-toggle" type="checkbox" checked />
+                  <span>Sync to VCO1</span>
+                  <input id="vco2-sync-toggle" type="checkbox" />
                 </label>
               </div>
             </div>
-            <div class="vco-start-wrapper">
-              <button type="button" id="vco2-toggle" class="vco-start" data-vco="vco2">Start VCO2</button>
-            </div>
-          </div>
         </div>
         <div class="control">
           <label for="cross-mod">Cross modulation amount</label>
@@ -190,6 +196,6 @@
       </footer>
     </div>
     <script src="assets/js/main.js?v=1" defer></script>
-    <script src="assets/js/vco.js?v=1" defer></script>
+    <script src="assets/js/vco.js?v=2" defer></script>
   </body>
 </html>
