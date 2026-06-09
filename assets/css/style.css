@@ -228,6 +228,23 @@ main {
   gap: 1rem;
 }
 
+.vco-start-wrapper {
+  margin-top: 1.5rem;
+}
+
+.vco-start {
+  width: 100%;
+  border: none;
+  border-radius: 0.8rem;
+  padding: 0.9rem 1.2rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+  color: #05050b;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .control {
   display: flex;
   flex-direction: column;

@@ -83,94 +83,99 @@
         <section class="section-panel vco-panel">
           <h2>Interactive VCO Lab</h2>
           <p>Play with a virtual analog oscillator that reacts to waveform choice, pitch, and an onboard LFO.</p>
-          <div class="vco-grid">
-            <div class="vco-column">
-              <h3>VCO1</h3>
-              <div class="vco-controls">
-                <div class="control">
-                  <label for="vco1-pitch">Pitch (Hz)</label>
-                  <input id="vco1-pitch" type="range" min="110" max="880" value="330" />
-                  <span id="vco1-pitch-value">330 Hz</span>
-                </div>
-                <div class="control">
-                  <label for="vco1-volume">Volume</label>
-                  <input id="vco1-volume" type="range" min="0" max="1" step="0.01" value="0.45" />
-                  <span id="vco1-volume-value">45%</span>
-                </div>
-                <div class="control">
-                  <label for="vco1-wave">Waveform</label>
-                  <div class="wave-buttons" role="group" aria-label="VCO1 waveform select" data-wave-group="vco1">
-                    <button type="button" data-wave="sine" class="active">Sine</button>
-                    <button type="button" data-wave="square">Square</button>
-                    <button type="button" data-wave="triangle">Triangle</button>
-                    <button type="button" data-wave="sawtooth">Sawtooth</button>
-                  </div>
-                </div>
-                <div class="control">
-                  <label for="vco1-lfo-rate">LFO rate (Hz)</label>
-                  <input id="vco1-lfo-rate" type="range" min="0.1" max="220" step="0.1" value="1.2" />
-                  <span id="vco1-lfo-rate-value">1.2 Hz</span>
-                </div>
-                <div class="control">
-                  <label for="vco1-lfo-depth">LFO depth</label>
-                  <input id="vco1-lfo-depth" type="range" min="0" max="220" value="88" />
-                  <span id="vco1-lfo-depth-value">88 Hz</span>
-                </div>
-                <div class="control">
-                  <label class="lfo-row">
-                    <span>LFO active</span>
-                    <input id="vco1-lfo-toggle" type="checkbox" checked />
-                  </label>
+        <div class="vco-grid">
+          <div class="vco-column">
+            <h3>VCO1</h3>
+            <div class="vco-controls">
+              <div class="control">
+                <label for="vco1-pitch">Pitch (Hz)</label>
+                <input id="vco1-pitch" type="range" min="110" max="880" value="330" />
+                <span id="vco1-pitch-value">330 Hz</span>
+              </div>
+              <div class="control">
+                <label for="vco1-volume">Volume</label>
+                <input id="vco1-volume" type="range" min="0" max="1" step="0.01" value="0.45" />
+                <span id="vco1-volume-value">45%</span>
+              </div>
+              <div class="control">
+                <label for="vco1-wave">Waveform</label>
+                <div class="wave-buttons" role="group" aria-label="VCO1 waveform select" data-wave-group="vco1">
+                  <button type="button" data-wave="sine" class="active">Sine</button>
+                  <button type="button" data-wave="square">Square</button>
+                  <button type="button" data-wave="triangle">Triangle</button>
+                  <button type="button" data-wave="sawtooth">Sawtooth</button>
                 </div>
               </div>
-            </div>
-            <div class="vco-column">
-              <h3>VCO2</h3>
-              <div class="vco-controls">
-                <div class="control">
-                  <label for="vco2-pitch">Pitch (Hz)</label>
-                  <input id="vco2-pitch" type="range" min="110" max="880" value="220" />
-                  <span id="vco2-pitch-value">220 Hz</span>
-                </div>
-                <div class="control">
-                  <label for="vco2-volume">Volume</label>
-                  <input id="vco2-volume" type="range" min="0" max="1" step="0.01" value="0.3" />
-                  <span id="vco2-volume-value">30%</span>
-                </div>
-                <div class="control">
-                  <label for="vco2-wave">Waveform</label>
-                  <div class="wave-buttons" role="group" aria-label="VCO2 waveform select" data-wave-group="vco2">
-                    <button type="button" data-wave="sine" class="active">Sine</button>
-                    <button type="button" data-wave="square">Square</button>
-                    <button type="button" data-wave="triangle">Triangle</button>
-                    <button type="button" data-wave="sawtooth">Sawtooth</button>
-                  </div>
-                </div>
-                <div class="control">
-                  <label for="vco2-lfo-rate">LFO rate (Hz)</label>
-                  <input id="vco2-lfo-rate" type="range" min="0.1" max="220" step="0.1" value="0.8" />
-                  <span id="vco2-lfo-rate-value">0.8 Hz</span>
-                </div>
-                <div class="control">
-                  <label for="vco2-lfo-depth">LFO depth</label>
-                  <input id="vco2-lfo-depth" type="range" min="0" max="220" value="60" />
-                  <span id="vco2-lfo-depth-value">60 Hz</span>
-                </div>
-                <div class="control">
-                  <label class="lfo-row">
-                    <span>LFO active</span>
-                    <input id="vco2-lfo-toggle" type="checkbox" checked />
-                  </label>
-                </div>
+              <div class="control">
+                <label for="vco1-lfo-rate">LFO rate (Hz)</label>
+                <input id="vco1-lfo-rate" type="range" min="0.1" max="6000" step="0.1" value="1.2" />
+                <span id="vco1-lfo-rate-value">1.2 Hz</span>
+              </div>
+              <div class="control">
+                <label for="vco1-lfo-depth">LFO depth</label>
+                <input id="vco1-lfo-depth" type="range" min="0" max="220" value="88" />
+                <span id="vco1-lfo-depth-value">88 Hz</span>
+              </div>
+              <div class="control">
+                <label class="lfo-row">
+                  <span>LFO active</span>
+                  <input id="vco1-lfo-toggle" type="checkbox" checked />
+                </label>
               </div>
             </div>
+            <div class="vco-start-wrapper">
+              <button type="button" id="vco1-toggle" class="vco-start" data-vco="vco1">Start VCO1</button>
+            </div>
           </div>
-          <div class="control">
-            <label for="cross-mod">Cross modulation amount</label>
-            <input id="cross-mod" type="range" min="0" max="1" step="0.01" value="0.2" />
-            <span id="cross-mod-value">20%</span>
+          <div class="vco-column">
+            <h3>VCO2</h3>
+            <div class="vco-controls">
+              <div class="control">
+                <label for="vco2-pitch">Pitch (Hz)</label>
+                <input id="vco2-pitch" type="range" min="110" max="880" value="220" />
+                <span id="vco2-pitch-value">220 Hz</span>
+              </div>
+              <div class="control">
+                <label for="vco2-volume">Volume</label>
+                <input id="vco2-volume" type="range" min="0" max="1" step="0.01" value="0.3" />
+                <span id="vco2-volume-value">30%</span>
+              </div>
+              <div class="control">
+                <label for="vco2-wave">Waveform</label>
+                <div class="wave-buttons" role="group" aria-label="VCO2 waveform select" data-wave-group="vco2">
+                  <button type="button" data-wave="sine" class="active">Sine</button>
+                  <button type="button" data-wave="square">Square</button>
+                  <button type="button" data-wave="triangle">Triangle</button>
+                  <button type="button" data-wave="sawtooth">Sawtooth</button>
+                </div>
+              </div>
+              <div class="control">
+                <label for="vco2-lfo-rate">LFO rate (Hz)</label>
+                <input id="vco2-lfo-rate" type="range" min="0.1" max="6000" step="0.1" value="0.8" />
+                <span id="vco2-lfo-rate-value">0.8 Hz</span>
+              </div>
+              <div class="control">
+                <label for="vco2-lfo-depth">LFO depth</label>
+                <input id="vco2-lfo-depth" type="range" min="0" max="220" value="60" />
+                <span id="vco2-lfo-depth-value">60 Hz</span>
+              </div>
+              <div class="control">
+                <label class="lfo-row">
+                  <span>LFO active</span>
+                  <input id="vco2-lfo-toggle" type="checkbox" checked />
+                </label>
+              </div>
+            </div>
+            <div class="vco-start-wrapper">
+              <button type="button" id="vco2-toggle" class="vco-start" data-vco="vco2">Start VCO2</button>
+            </div>
           </div>
-          <button id="vco-toggle" type="button">Start VCOs</button>
+        </div>
+        <div class="control">
+          <label for="cross-mod">Cross modulation amount</label>
+          <input id="cross-mod" type="range" min="0" max="1" step="0.01" value="0.2" />
+          <span id="cross-mod-value">20%</span>
+        </div>
         </section>
         <section class="section-panel">
           <h2>Live Signal</h2>
@@ -184,7 +189,7 @@
         <p>© 2026 Haze Anderson. Crafted with luminous analog warmth.</p>
       </footer>
     </div>
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/vco.js" defer></script>
+    <script src="assets/js/main.js?v=1" defer></script>
+    <script src="assets/js/vco.js?v=1" defer></script>
   </body>
 </html>

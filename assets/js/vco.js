@@ -6,8 +6,7 @@
 
   const crossModSlider = document.getElementById('cross-mod');
   const crossModValue = document.getElementById('cross-mod-value');
-  const toggleButton = document.getElementById('vco-toggle');
-  if (!crossModSlider || !crossModValue || !toggleButton) return;
+  if (!crossModSlider || !crossModValue) return;
 
   const vcos = vcoDescriptors.map((descriptor) => {
     const pitchSlider = document.getElementById(`${descriptor.prefix}-pitch`);
@@ -20,6 +19,7 @@
     const lfoDepthValue = document.getElementById(`${descriptor.prefix}-lfo-depth-value`);
     const lfoToggle = document.getElementById(`${descriptor.prefix}-lfo-toggle`);
     const waveButtonsContainer = document.querySelector(`.wave-buttons[data-wave-group="${descriptor.prefix}"]`);
+    const toggleButton = document.getElementById(`${descriptor.prefix}-toggle`);
     if (
       !pitchSlider ||
       !pitchValue ||
@@ -30,7 +30,8 @@
       !lfoDepthSlider ||
       !lfoDepthValue ||
       !lfoToggle ||
-      !waveButtonsContainer
+      !waveButtonsContainer ||
+      !toggleButton
     ) {
       return null;
     }
@@ -54,6 +55,8 @@
       gainNode: null,
       lfo: null,
       lfoGain: null,
+      toggleButton,
+      playing: false,
     };
   });
 
@@ -63,7 +66,6 @@
   let audioCtx;
   let crossGain;
   let started = false;
-  let playing = false;
 
   const ensureAudio = () => {
     if (audioCtx) return;
@@ -137,7 +139,7 @@
     const value = Number(state.volumeSlider.value);
     state.volumeValue.textContent = `${Math.round(value * 100)}%`;
     if (state.gainNode && audioCtx) {
-      const target = playing ? value : 0;
+      const target = state.playing ? value : 0;
       state.gainNode.gain.setTargetAtTime(target, audioCtx.currentTime, 0.02);
     }
   };
@@ -177,12 +179,30 @@
 
   crossModSlider.addEventListener('input', updateCrossMod);
 
+  const setPlaying = (state, shouldPlay) => {
+    state.playing = shouldPlay;
+    updateVolume(state);
+    if (state.toggleButton) {
+      state.toggleButton.textContent = shouldPlay
+        ? `Stop ${state.prefix.toUpperCase()}`
+        : `Start ${state.prefix.toUpperCase()}`;
+    }
+  };
+
   vcos.forEach((state) => {
     state.pitchSlider.addEventListener('input', () => updatePitch(state));
     state.volumeSlider.addEventListener('input', () => updateVolume(state));
     state.lfoRateSlider.addEventListener('input', () => updateLfoRate(state));
     state.lfoDepthSlider.addEventListener('input', () => updateLfoDepth(state));
     state.lfoToggle.addEventListener('change', () => updateLfoToggle(state));
+    state.toggleButton.addEventListener('click', async () => {
+      ensureAudio();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+      startOscillators();
+      setPlaying(state, !state.playing);
+    });
   });
 
   updateCrossMod();
@@ -191,16 +211,6 @@
     updateVolume(state);
     updateLfoRate(state);
     updateLfoDepth(state);
-  });
-
-  toggleButton.addEventListener('click', async () => {
-    ensureAudio();
-    if (audioCtx && audioCtx.state === 'suspended') {
-      await audioCtx.resume();
-    }
-    startOscillators();
-    playing = !playing;
-    vcos.forEach((state) => updateVolume(state));
-    toggleButton.textContent = playing ? 'Stop VCOs' : 'Start VCOs';
+    setPlaying(state, false);
   });
 })();
