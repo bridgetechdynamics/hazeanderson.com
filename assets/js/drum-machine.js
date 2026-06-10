@@ -9,10 +9,13 @@ function initDrumMachine() {
 
   const tempoInput = document.getElementById('drum-tempo');
   const tempoDisplay = document.getElementById('drum-tempo-value');
+  const volumeInput = document.getElementById('drum-volume');
+  const volumeDisplay = document.getElementById('drum-volume-value');
   const startButton = document.getElementById('drum-start');
-  if (!tempoInput || !tempoDisplay || !startButton) return;
+  if (!tempoInput || !tempoDisplay || !volumeInput || !volumeDisplay || !startButton) return;
   grid.innerHTML = '';
   tempoDisplay.textContent = tempoInput.value;
+  volumeDisplay.textContent = `${volumeInput.value}%`;
 
   const columnCells = Array.from({ length: TOTAL_COLUMNS }, () => []);
   const pattern = Array(TOTAL_COLUMNS).fill(null);
@@ -60,12 +63,20 @@ function initDrumMachine() {
 
   let audioCtx;
   let noiseBuffer;
+  let masterGain;
   let isPlaying = false;
   let currentStep = 0;
   let playTimeout;
 
   tempoInput.addEventListener('input', () => {
     tempoDisplay.textContent = tempoInput.value;
+  });
+
+  volumeInput.addEventListener('input', () => {
+    volumeDisplay.textContent = `${volumeInput.value}%`;
+    if (masterGain) {
+      masterGain.gain.value = getVolume();
+    }
   });
 
   startButton.addEventListener('click', () => {
@@ -76,9 +87,14 @@ function initDrumMachine() {
     startSequence();
   });
 
+  const getVolume = () => Math.max(0, Math.min(1, Number(volumeInput.value) / 100));
+
   function ensureAudio() {
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = getVolume();
+      masterGain.connect(audioCtx.destination);
       noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate, audioCtx.sampleRate);
       const data = noiseBuffer.getChannelData(0);
       for (let i = 0; i < data.length; i += 1) {
@@ -150,7 +166,7 @@ function initDrumMachine() {
     osc.frequency.exponentialRampToValueAtTime(40, now + 0.35);
     gain.gain.setValueAtTime(1, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-    osc.connect(gain).connect(audioCtx.destination);
+    osc.connect(gain).connect(masterGain);
     osc.start(now);
     osc.stop(now + 0.6);
   }
@@ -166,7 +182,7 @@ function initDrumMachine() {
     const noiseGain = audioCtx.createGain();
     noiseGain.gain.setValueAtTime(1, now);
     noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-    noiseSource.connect(noiseFilter).connect(noiseGain).connect(audioCtx.destination);
+    noiseSource.connect(noiseFilter).connect(noiseGain).connect(masterGain);
     noiseSource.start(now);
     noiseSource.stop(now + 0.3);
 
@@ -176,7 +192,7 @@ function initDrumMachine() {
     bodyOsc.frequency.setValueAtTime(200, now);
     bodyGain.gain.setValueAtTime(0.6, now);
     bodyGain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-    bodyOsc.connect(bodyGain).connect(audioCtx.destination);
+    bodyOsc.connect(bodyGain).connect(masterGain);
     bodyOsc.start(now);
     bodyOsc.stop(now + 0.4);
   }
@@ -191,7 +207,7 @@ function initDrumMachine() {
     const hatGain = audioCtx.createGain();
     hatGain.gain.setValueAtTime(0.8, now);
     hatGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
-    noiseSource.connect(filter).connect(hatGain).connect(audioCtx.destination);
+    noiseSource.connect(filter).connect(hatGain).connect(masterGain);
     noiseSource.start(now);
     noiseSource.stop(now + duration);
   }
@@ -205,7 +221,7 @@ function initDrumMachine() {
     osc.frequency.exponentialRampToValueAtTime(freq * 0.65, now + 0.25);
     gain.gain.setValueAtTime(0.9, now);
     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-    osc.connect(gain).connect(audioCtx.destination);
+    osc.connect(gain).connect(masterGain);
     osc.start(now);
     osc.stop(now + 0.5);
   }
