@@ -64,6 +64,32 @@
             </article>
           </div>
         </section>
+        <section class="section-panel drum-section">
+          <div class="drum-section-head">
+            <div>
+              <h2>Modular drum machine</h2>
+              <p>Program a monophonic 6-track pattern, tweak tempo, and feel the pulse of the catalog.</p>
+            </div>
+            <div class="drum-controls">
+              <label class="control">
+                <span>Tempo <strong id="drum-tempo-value">140</strong> BPM</span>
+                <input id="drum-tempo" type="range" min="60" max="220" value="140" />
+              </label>
+              <button id="drum-start" class="drum-start">Start</button>
+            </div>
+          </div>
+          <div class="drum-grid-wrapper">
+            <div class="drum-track-labels" aria-hidden="true">
+              <span>Bass Drum</span>
+              <span>Snare Drum</span>
+              <span>Closed Hi-Hat</span>
+              <span>Open Hi-Hat</span>
+              <span>Low Tom</span>
+              <span>High Tom</span>
+            </div>
+            <div class="drum-grid" id="drum-grid" aria-label="Drum sequencer"></div>
+          </div>
+        </section>
       </main>
       <footer class="footer">
         <p>© 2026 Haze Anderson. Vinyl, digital, neon.</p>
