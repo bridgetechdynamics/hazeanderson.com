@@ -80,8 +80,8 @@
               <div class="vco-controls">
                 <div class="control">
                   <label for="ring-vco1-pitch">Pitch (Hz)</label>
-                  <input id="ring-vco1-pitch" type="range" min="110" max="880" value="330" />
-                  <span id="ring-vco1-pitch-value">330 Hz</span>
+                  <input id="ring-vco1-pitch" type="range" min="40" max="10000" value="100" />
+                  <span id="ring-vco1-pitch-value">100 Hz</span>
                 </div>
                 <div class="control">
                   <label for="ring-vco1-volume">Volume</label>
@@ -104,7 +104,7 @@
               <div class="vco-controls">
                 <div class="control">
                   <label for="ring-vco2-pitch">Pitch (Hz)</label>
-                  <input id="ring-vco2-pitch" type="range" min="110" max="880" value="220" />
+                  <input id="ring-vco2-pitch" type="range" min="40" max="10000" value="220" />
                   <span id="ring-vco2-pitch-value">220 Hz</span>
                 </div>
                 <div class="control">
@@ -127,18 +127,18 @@
           <div class="ring-lfo-controls">
             <div class="control">
               <label for="ring-lfo-rate">LFO Rate (BPM)</label>
-              <input id="ring-lfo-rate" type="range" min="30" max="240" value="120" />
-              <span id="ring-lfo-rate-value">120 BPM</span>
+              <input id="ring-lfo-rate" type="range" min="30" max="240" value="30" />
+              <span id="ring-lfo-rate-value">30 BPM</span>
             </div>
             <div class="control">
               <label for="ring-lfo-range">LFO Range</label>
-              <input id="ring-lfo-range" type="range" min="0" max="200" value="80" />
-              <span id="ring-lfo-range-value">80 Hz</span>
+              <input id="ring-lfo-range" type="range" min="0" max="10000" value="1000" />
+              <span id="ring-lfo-range-value">1000 Hz</span>
             </div>
             <div class="control">
               <label for="ring-lfo-frequency">LFO Frequency Offset</label>
-              <input id="ring-lfo-frequency" type="range" min="0" max="10" step="0.1" value="2" />
-              <span id="ring-lfo-frequency-value">2.0 Hz</span>
+              <input id="ring-lfo-frequency" type="range" min="0" max="10" step="0.1" value="0.5" />
+              <span id="ring-lfo-frequency-value">0.5 Hz</span>
             </div>
           </div>
           <div class="ring-master">
