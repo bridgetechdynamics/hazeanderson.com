@@ -10,4 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (page === 'discography' && window.initDrumMachine) {
     window.initDrumMachine();
   }
+  if (page === 'channels' && window.initRingModulator) {
+    window.initRingModulator();
+  }
 });

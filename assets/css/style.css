@@ -136,6 +136,45 @@ main {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+.ring-panel .ring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.ring-column {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.ring-column h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ring-lfo-controls {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.ring-master {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.ring-master .control {
+  flex: 1;
+  min-width: 220px;
+}
+
 .section-panel h2 {
   margin-top: 0;
   margin-bottom: 1rem;

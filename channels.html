@@ -71,11 +71,90 @@
             </article>
           </div>
         </section>
+        <section class="section-panel ring-panel">
+          <h2>Ring Modulator Lab</h2>
+          <p>Blend two VCOs with synchronized LFOs feeding a classic ring modulator for lush metallic textures.</p>
+          <div class="ring-grid">
+            <div class="ring-column">
+              <h3>VCO1 (Carrier)</h3>
+              <div class="vco-controls">
+                <div class="control">
+                  <label for="ring-vco1-pitch">Pitch (Hz)</label>
+                  <input id="ring-vco1-pitch" type="range" min="110" max="880" value="330" />
+                  <span id="ring-vco1-pitch-value">330 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="ring-vco1-volume">Volume</label>
+                  <input id="ring-vco1-volume" type="range" min="0" max="1" step="0.01" value="0.6" />
+                  <span id="ring-vco1-volume-value">60%</span>
+                </div>
+                <div class="control">
+                  <label>Waveform</label>
+                  <div class="wave-buttons" role="group" aria-label="Ring VCO1 waveform" data-wave-group="ring-vco1">
+                    <button type="button" data-wave="sine" class="active">Sine</button>
+                    <button type="button" data-wave="square">Square</button>
+                    <button type="button" data-wave="triangle">Triangle</button>
+                    <button type="button" data-wave="sawtooth">Sawtooth</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ring-column">
+              <h3>VCO2 (Modulator)</h3>
+              <div class="vco-controls">
+                <div class="control">
+                  <label for="ring-vco2-pitch">Pitch (Hz)</label>
+                  <input id="ring-vco2-pitch" type="range" min="110" max="880" value="220" />
+                  <span id="ring-vco2-pitch-value">220 Hz</span>
+                </div>
+                <div class="control">
+                  <label for="ring-vco2-volume">Volume</label>
+                  <input id="ring-vco2-volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+                  <span id="ring-vco2-volume-value">50%</span>
+                </div>
+                <div class="control">
+                  <label>Waveform</label>
+                  <div class="wave-buttons" role="group" aria-label="Ring VCO2 waveform" data-wave-group="ring-vco2">
+                    <button type="button" data-wave="sine" class="active">Sine</button>
+                    <button type="button" data-wave="square">Square</button>
+                    <button type="button" data-wave="triangle">Triangle</button>
+                    <button type="button" data-wave="sawtooth">Sawtooth</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ring-lfo-controls">
+            <div class="control">
+              <label for="ring-lfo-rate">LFO Rate (BPM)</label>
+              <input id="ring-lfo-rate" type="range" min="30" max="240" value="120" />
+              <span id="ring-lfo-rate-value">120 BPM</span>
+            </div>
+            <div class="control">
+              <label for="ring-lfo-range">LFO Range</label>
+              <input id="ring-lfo-range" type="range" min="0" max="200" value="80" />
+              <span id="ring-lfo-range-value">80 Hz</span>
+            </div>
+            <div class="control">
+              <label for="ring-lfo-frequency">LFO Frequency Offset</label>
+              <input id="ring-lfo-frequency" type="range" min="0" max="10" step="0.1" value="2" />
+              <span id="ring-lfo-frequency-value">2.0 Hz</span>
+            </div>
+          </div>
+          <div class="ring-master">
+            <label class="control">
+              <span>Master Volume <strong id="ring-master-volume-value">60%</strong></span>
+              <input id="ring-master-volume" type="range" min="0" max="100" value="60" />
+            </label>
+            <button id="ring-start" class="vco-start">Start Ring Modulator</button>
+          </div>
+        </section>
       </main>
       <footer class="footer">
         <p>© 2026 Haze Anderson. Signal fidelity maintained.</p>
       </footer>
     </div>
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/ring-modulator.js?v=1" defer></script>
+    <script src="assets/js/main.js?v=1" defer></script>
   </body>
 </html>
