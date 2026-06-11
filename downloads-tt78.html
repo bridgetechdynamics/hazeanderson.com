@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
   </head>
   <body data-page="downloads-detail">
     <div class="page-shell">
@@ -95,6 +96,36 @@
         <p>© 2026 Haze Anderson. Samples tuned for midnight studio laps.</p>
       </footer>
     </div>
+    <div class="image-modal" id="image-modal">
+      <div class="image-modal-inner">
+        <img id="image-modal-img" src="" alt="Expanded image" />
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('image-modal-img');
+        if (!modal || !modalImg) return;
+        const galleryImages = document.querySelectorAll('.detail-gallery img');
+        galleryImages.forEach((img) => {
+          img.addEventListener('click', () => {
+            modalImg.src = img.src;
+            modalImg.alt = img.alt || 'Expanded artwork';
+            modal.classList.add('active');
+          });
+        });
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.classList.remove('active');
+          }
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            modal.classList.remove('active');
+          }
+        });
+      });
+    </script>
     <script src="assets/js/main.js" defer></script>
   </body>
 </html>
