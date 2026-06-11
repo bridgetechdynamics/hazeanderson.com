@@ -136,6 +136,150 @@ main {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+.downloads-hero {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.download-hero-copy {
+  max-width: 640px;
+}
+
+.download-hero-stats {
+  min-width: 220px;
+  display: grid;
+  gap: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.download-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.download-card {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.download-card-media img {
+  width: 100%;
+  border-radius: 0.9rem;
+  display: block;
+}
+
+.download-card-body h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.download-card-body ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.download-card-body ul li {
+  margin-bottom: 0.35rem;
+}
+
+.download-card-meta {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+  color: #05050b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: transform 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.download-link:hover {
+  transform: translateY(-2px);
+}
+
+.product-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.product-hero-media {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.product-hero-media img {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.detail-gallery figure {
+  margin: 0;
+}
+
+.detail-gallery img {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.video-embed {
+  margin-top: 1rem;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.video-embed iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 .ring-panel .ring-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
