@@ -210,6 +210,64 @@ main {
   transform: scale(1.04);
 }
 
+.feature-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 140, 66, 0.9);
+  color: #05050b;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.feature-card {
+  position: relative;
+}
+
+.feature-card:hover .feature-badge,
+.feature-card:focus-within .feature-badge {
+  background: rgba(255, 140, 66, 1);
+  transform: translateY(-2px);
+  animation: badgePulse 1.2s ease-in-out infinite;
+}
+
+.feature-badge::after {
+  content: attr(data-hover);
+  position: absolute;
+  top: 120%;
+  right: 50%;
+  transform: translate(50%, 0) scale(0.9);
+  background: rgba(5, 5, 11, 0.95);
+  color: var(--ink);
+  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.feature-card:hover .feature-badge::after,
+.feature-card:focus-within .feature-badge::after {
+  opacity: 1;
+  transform: translate(50%, 4px) scale(1);
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: translateY(-2px) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.02);
+  }
+}
+
 .feature-card h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
