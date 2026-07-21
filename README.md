@@ -12,7 +12,7 @@ This project is a portfolio site for Haze Anderson with interactive synthesis to
 Open `index.html` in a browser. No build steps are required; the site is static and the scripts run on page load.
 
 ## Release modal
-The release modal on the home page is configured via `assets/js/release-modal.js`. The script reads from a `schedule` array that holds objects like this:
+The release modal on the home page is configured via `assets/js/release-modal.js`. The script consumes a `schedule` array of release entries, each containing the artwork, preview window, release date, take-down date, the listening party URL, and the album URL:
 
 ```js
 {
@@ -22,11 +22,13 @@ The release modal on the home page is configured via `assets/js/release-modal.js
   image: 'assets/images/kumite.jpg',
   releaseDate: '2026-08-05T20:00:00-05:00',
   previewStart: '2026-07-21T00:00:00-05:00',
-  listeningParty: 'https://www.youtube.com/watch?v=...'
+  takeDown: '2026-09-01T00:00:00-05:00',
+  listeningParty: 'https://www.youtube.com/watch?v=...',
+  albumLink: 'https://hazeanderson.bandcamp.com/album/aurora-born'
 }
 ```
 
-Only the first release that is flagged as `active` (the default configuration) and whose `previewStart ≤ now < releaseDate` will trigger the modal. When the modal appears it starts a countdown to `releaseDate`, displays the provided artwork and description, and includes the listening-party link you specify.
+The modal automatically appears when the current date is inside the preview/take-down window (`previewStart ≤ now < takeDown`). It shows a countdown to `releaseDate` (which stays at zero after the drop), presents the artwork/description, and displays one button whose href and label automatically flip from “Release party” to “Stream the album” once `releaseDate` passes. When the take-down date has been reached the modal hides itself and stops counting down.
 
 ### Activating the modal
 1. Add or edit an entry in the `schedule` array with the future release data (title, artwork path, release datetime, preview window start, and party link).

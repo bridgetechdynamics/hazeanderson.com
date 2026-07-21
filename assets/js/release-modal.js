@@ -1,14 +1,15 @@
 (function () {
   const schedule = [
     {
-      id: 'free-energy',
-      title: 'Free Energy',
-      description: 'Join the listening party for Free Energy on Bandcamp!',
+      id: 'aurora-born',
+      title: 'Aurora Born',
+      description: 'New long-form album bridging analog bass rituals with cinematic late-night motorik.',
       image: 'assets/images/kumite.jpg',
-      releaseDate: '2026-07-20:00:00-05:00',
+      releaseDate: '2026-07-20T20:00:00-05:00',
       previewStart: '2026-07-01T00:00:00-05:00',
-      takeDown: '2026-08-21T00:00:00-05:00',
-      listeningParty: 'https://www.youtube.com/watch?v=6n1LkR4afNI?si=kyWfF_Kt1AviRlpP'
+      takeDown: '2026-07-21T00:00:00-05:00',
+      listeningParty: 'https://www.youtube.com/watch?v=6n1LkR4afNI?si=kyWfF_Kt1AviRlpP',
+      albumLink: 'https://hazeanderson.bandcamp.com/album/aurora-born'
     }
   ];
 
@@ -36,7 +37,18 @@
 
   const releaseDate = new Date(release.releaseDate);
   const takeDownDate = new Date(release.takeDown);
-  const previewStartDate = new Date(release.previewStart);
+
+  const updateLinks = (isLive) => {
+    if (!party) return;
+    if (isLive) {
+      party.href = release.albumLink;
+      party.textContent = 'Stream the album';
+    } else {
+      party.href = release.listeningParty;
+      party.textContent = 'Release party';
+    }
+  };
+
   const updateCountdown = () => {
     const now = new Date();
     if (now >= takeDownDate) {
@@ -45,7 +57,9 @@
       return;
     }
     const diff = releaseDate - now;
-    if (diff <= 0) {
+    const isLive = diff <= 0;
+    updateLinks(isLive);
+    if (isLive) {
       days.textContent = '0';
       hours.textContent = '0';
       mins.textContent = '0';
@@ -53,14 +67,15 @@
       kicker.textContent = 'Release is live';
       return;
     }
-    const d = Math.floor(diff / 1000 / 60 / 60 / 24);
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    days.textContent = d;
-    hours.textContent = h;
-    mins.textContent = m;
-    secs.textContent = s;
+    kicker.textContent = 'New album drop';
+    const daysCount = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hoursCount = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutesCount = Math.floor((diff / (1000 * 60)) % 60);
+    const secondsCount = Math.floor((diff / 1000) % 60);
+    days.textContent = daysCount;
+    hours.textContent = hoursCount;
+    mins.textContent = minutesCount;
+    secs.textContent = secondsCount;
   };
 
   const interval = window.setInterval(updateCountdown, 1000);
@@ -68,21 +83,11 @@
   art.alt = `${release.title} cover`;
   title.textContent = release.title;
   copy.textContent = release.description;
-  party.href = release.listeningParty;
-  party.textContent = 'Join listening party';
-  kicker.textContent = 'New album drop';
 
-  const previewActive = now >= previewStartDate;
   const show = () => {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     updateCountdown();
-    const now = new Date();
-    const isLive = now >= releaseDate;
-    party.href = isLive ? release.listeningParty : '#';
-    party.classList.toggle('disabled', !isLive);
-    party.setAttribute('aria-disabled', String(!isLive));
-    party.textContent = isLive ? 'Join listening party' : 'Coming Soon';
   };
 
   const hide = () => {
