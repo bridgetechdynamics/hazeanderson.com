@@ -1,12 +1,13 @@
 (function () {
   const schedule = [
     {
-      id: 'aurora-born',
-      title: 'Aurora Born',
-      description: 'New long-form album bridging analog bass rituals with cinematic late-night motorik.',
+      id: 'free-energy',
+      title: 'Free Energy',
+      description: 'Join the listening party for Free Energy on Bandcamp!',
       image: 'assets/images/kumite.jpg',
-      releaseDate: '2026-08-05T20:00:00-05:00',
-      previewStart: '2026-07-21T00:00:00-05:00',
+      releaseDate: '2026-07-20:00:00-05:00',
+      previewStart: '2026-07-01T00:00:00-05:00',
+      takeDown: '2026-08-21T00:00:00-05:00',
       listeningParty: 'https://www.youtube.com/watch?v=6n1LkR4afNI?si=kyWfF_Kt1AviRlpP'
     }
   ];
@@ -28,17 +29,28 @@
   const now = new Date();
   const release = schedule.find((item) => {
     const start = new Date(item.previewStart);
-    const end = new Date(item.releaseDate);
+    const end = new Date(item.takeDown);
     return start <= now && now < end;
   });
   if (!release) return;
 
   const releaseDate = new Date(release.releaseDate);
+  const takeDownDate = new Date(release.takeDown);
+  const previewStartDate = new Date(release.previewStart);
   const updateCountdown = () => {
-    const diff = releaseDate - new Date();
-    if (diff <= 0) {
+    const now = new Date();
+    if (now >= takeDownDate) {
       modal.classList.remove('active');
       clearInterval(interval);
+      return;
+    }
+    const diff = releaseDate - now;
+    if (diff <= 0) {
+      days.textContent = '0';
+      hours.textContent = '0';
+      mins.textContent = '0';
+      secs.textContent = '0';
+      kicker.textContent = 'Release is live';
       return;
     }
     const d = Math.floor(diff / 1000 / 60 / 60 / 24);
@@ -60,10 +72,17 @@
   party.textContent = 'Join listening party';
   kicker.textContent = 'New album drop';
 
+  const previewActive = now >= previewStartDate;
   const show = () => {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     updateCountdown();
+    const now = new Date();
+    const isLive = now >= releaseDate;
+    party.href = isLive ? release.listeningParty : '#';
+    party.classList.toggle('disabled', !isLive);
+    party.setAttribute('aria-disabled', String(!isLive));
+    party.textContent = isLive ? 'Join listening party' : 'Coming Soon';
   };
 
   const hide = () => {
