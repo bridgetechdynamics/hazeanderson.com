@@ -1,15 +1,15 @@
 (function () {
   const schedule = [
     {
-      id: 'aurora-born',
-      title: 'Aurora Born',
-      description: 'New long-form album bridging analog bass rituals with cinematic late-night motorik.',
-      image: 'assets/images/kumite.jpg',
-      releaseDate: '2026-07-20T20:00:00-05:00',
-      previewStart: '2026-07-01T00:00:00-05:00',
-      takeDown: '2026-07-21T00:00:00-05:00',
-      listeningParty: 'https://www.youtube.com/watch?v=6n1LkR4afNI?si=kyWfF_Kt1AviRlpP',
-      albumLink: 'https://hazeanderson.bandcamp.com/album/aurora-born'
+      id: 'free-energy',
+      title: 'Free Energy',
+      description: 'New album from Haze Anderson. Price: Free as in Beer!',
+      image: 'assets/images/free-energy.jpg',
+      releaseDate: '2026-08-31:00:00-05:00',
+      previewStart: '2026-08-26T00:00:00-05:00',
+      takeDown: '2026-09-11T00:00:00-05:00',
+      listeningParty: 'https://hazeanderson.bandcamp.com/album/free-energy',
+      albumLink: 'https://hazeanderson.bandcamp.com/album/free-energy'
     }
   ];
 
