@@ -33,15 +33,11 @@
   });
   if (!release) return;
 
-  const dismissed = localStorage.getItem(`release-dismissed-${release.id}`);
-  if (dismissed) return;
-
   const releaseDate = new Date(release.releaseDate);
   const updateCountdown = () => {
     const diff = releaseDate - new Date();
     if (diff <= 0) {
       modal.classList.remove('active');
-      localStorage.setItem(`release-dismissed-${release.id}`, 'true');
       clearInterval(interval);
       return;
     }
@@ -73,7 +69,6 @@
   const hide = () => {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
-    localStorage.setItem(`release-dismissed-${release.id}`, 'true');
     clearInterval(interval);
   };
 
