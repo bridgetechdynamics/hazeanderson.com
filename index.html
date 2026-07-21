@@ -41,6 +41,39 @@
           </div>
         </div>
       </header>
+      <div class="release-modal" id="release-modal" aria-hidden="true">
+        <div class="release-modal-backdrop"></div>
+        <div class="release-modal-window" role="dialog" aria-labelledby="release-modal-title" aria-modal="true">
+          <button class="release-modal-close" type="button" aria-label="Close release notice">×</button>
+          <div class="release-modal-body">
+            <img id="release-modal-art" src="" alt="" />
+            <div>
+              <p class="hero-kicker" id="release-modal-kicker">New release</p>
+              <h2 id="release-modal-title"></h2>
+              <p id="release-modal-copy"></p>
+              <div class="release-countdown" aria-live="polite">
+                <div>
+                  <span class="count-value" id="release-count-days">0</span>
+                  <span class="count-label">Days</span>
+                </div>
+                <div>
+                  <span class="count-value" id="release-count-hours">0</span>
+                  <span class="count-label">Hours</span>
+                </div>
+                <div>
+                  <span class="count-value" id="release-count-minutes">0</span>
+                  <span class="count-label">Minutes</span>
+                </div>
+                <div>
+                  <span class="count-value" id="release-count-seconds">0</span>
+                  <span class="count-label">Seconds</span>
+                </div>
+              </div>
+              <a class="download-link" id="release-modal-party" href="" target="_blank" rel="noreferrer">Join listening party</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <main>
         <section class="section-panel">
           <h2>Current Mood</h2>
@@ -197,6 +230,7 @@
         <p>© 2026 Haze Anderson. Crafted with luminous analog warmth.</p>
       </footer>
     </div>
+    <script src="assets/js/release-modal.js" defer></script>
     <script src="assets/js/main.js?v=1" defer></script>
     <script src="assets/js/vco.js?v=2" defer></script>
   </body>
