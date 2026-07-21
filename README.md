@@ -6,7 +6,8 @@ This project is a portfolio site for Haze Anderson with interactive synthesis to
 - `index.html`: landing page with hero, feature cards, and the interactive VCO lab plus the release modal.
 - `discography.html`, `downloads.html`, `channels.html`, `contact.html`: additional pages covering releases, downloads/tools, live channels, and the contact form.
 - `assets/css/style.css`: shared styling for all pages plus the modals and interactive components.
-- `assets/js/`: page-specific scripts (`main.js`, `vco.js`, `drum-machine.js`, `ring-modulator.js`, `astronoise.js`, `release-modal.js`).
+- `assets/js/`: page-specific scripts (`main.js`, `vco.js`, `drum-machine.js`, `ring-modulator.js`, `filter.js`, `release-modal.js`).
+  - `filter.js` powers the downloads page’s PRBS-based filter demo, generating a pseudo-random bitstream that feeds a bandpass filter while LFO and envelope controls shape the filtered noise.
 
 ## Running locally
 Open `index.html` in a browser. No build steps are required; the site is static and the scripts run on page load.
@@ -41,3 +42,8 @@ The modal automatically appears when the current date is inside the preview/take
 - When a visitor closes the modal, their browser stores a `release-dismissed_{id}` flag so it stays hidden for that release; you can clear this key from the browser’s `localStorage` if you want to re-show the modal for testing.
 
 Feel free to reuse this modal for future releases by setting up a new schedule entry prior to each launch.
+
+## Filter demo and PRBS
+- `downloads.html` now hosts the Filter demo, which is wired through `assets/js/filter.js`.
+- Internally `filter.js` keeps a 16-bit LFSR-based PRBS generator (`stepLfsr()`), fills each buffer frame with ±1 bits, and sends that pseudo-random stream through the band-pass filter so you always hear the filtered noise rather than raw oscillators.
+- The intensity slider scales the PRBS amplitude, the LFO and glide depth modulate the filter’s center frequency, and the envelope/burst controls gate how the PRBS noise is exposed, giving you a noisy filter voice inspired by classic Atari hardware.

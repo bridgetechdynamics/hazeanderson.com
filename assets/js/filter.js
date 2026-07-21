@@ -1,22 +1,22 @@
 (function () {
-  function initAstronoise() {
+  function initFilter() {
     if (document.body.dataset.page !== 'downloads') return;
 
-    const baseFreqSlider = document.getElementById('astronoise-base-frequency');
-    const baseFreqValue = document.getElementById('astronoise-base-frequency-value');
-    const resonanceSlider = document.getElementById('astronoise-resonance');
-    const resonanceValue = document.getElementById('astronoise-resonance-value');
-    const intensitySlider = document.getElementById('astronoise-intensity');
-    const intensityValue = document.getElementById('astronoise-intensity-value');
-    const glideDepthSlider = document.getElementById('astronoise-glide-depth');
-    const glideDepthValue = document.getElementById('astronoise-glide-depth-value');
-    const lfoRateSlider = document.getElementById('astronoise-lfo-rate');
-    const lfoRateValue = document.getElementById('astronoise-lfo-rate-value');
-    const shoutRateSlider = document.getElementById('astronoise-shout-rate');
-    const shoutRateValue = document.getElementById('astronoise-shout-rate-value');
-    const startButton = document.getElementById('astronoise-start');
-    const shoutButton = document.getElementById('astronoise-shout');
-    const stateLabel = document.getElementById('astronoise-state');
+    const baseFreqSlider = document.getElementById('filter-base-frequency');
+    const baseFreqValue = document.getElementById('filter-base-frequency-value');
+    const resonanceSlider = document.getElementById('filter-resonance');
+    const resonanceValue = document.getElementById('filter-resonance-value');
+    const intensitySlider = document.getElementById('filter-intensity');
+    const intensityValue = document.getElementById('filter-intensity-value');
+    const glideDepthSlider = document.getElementById('filter-glide-depth');
+    const glideDepthValue = document.getElementById('filter-glide-depth-value');
+    const lfoRateSlider = document.getElementById('filter-lfo-rate');
+    const lfoRateValue = document.getElementById('filter-lfo-rate-value');
+    const shoutRateSlider = document.getElementById('filter-shout-rate');
+    const shoutRateValue = document.getElementById('filter-shout-rate-value');
+    const startButton = document.getElementById('filter-start');
+    const shoutButton = document.getElementById('filter-burst');
+    const stateLabel = document.getElementById('filter-state');
 
     if (
       !baseFreqSlider ||
@@ -158,14 +158,14 @@
     const setRunning = async (shouldRun) => {
       if (shouldRun === running) return;
       if (shouldRun) {
-        startButton.textContent = 'Mute Astronoise';
+        startButton.textContent = 'Mute Filter';
         await resumeContext();
         running = true;
         updateStateLabel('Ready to roar');
         startAutoShout();
         triggerShout();
       } else {
-        startButton.textContent = 'Awaken Astronoise';
+        startButton.textContent = 'Awaken Filter';
         running = false;
         updateStateLabel('Dormant');
         stopAutoShout();
@@ -237,5 +237,5 @@
     updateSliderLabel(shoutRateValue, Number(shoutRateSlider.value), '/s', 1);
   }
 
-  document.addEventListener('DOMContentLoaded', initAstronoise);
+  document.addEventListener('DOMContentLoaded', initFilter);
 })();

@@ -80,52 +80,52 @@
           </div>
         </section>
       </main>
-        <section class="section-panel astronoise-panel">
-          <div class="astronoise-header">
+        <section class="section-panel filter-panel">
+          <div class="filter-header">
             <div>
-              <h2>Astronoise</h2>
+              <h2>Filter</h2>
               <p>
-                Sculpt a Tarzan yell / Joust pterodactyl cry with bandpass-cut noise, LFO sweeps, and automated
-                pseudo-random bursts inspired by the Atari 2600’s wild PRBS circuitry.
+                Explore a PRBS-driven filter demo: a bandpass voice carved from pseudo-random noise, LFO sweeps, and
+                envelope bursts that highlight how complex filters shape sound in hardware-inspired circuits.
               </p>
             </div>
-            <span class="astronoise-status" id="astronoise-state">Dormant</span>
+            <span class="filter-status" id="filter-state">Dormant</span>
           </div>
-          <div class="astronoise-grid">
-            <div class="astronoise-control">
-              <label for="astronoise-base-frequency">Filter Base</label>
-              <input id="astronoise-base-frequency" type="range" min="150" max="2600" value="900" />
-              <span id="astronoise-base-frequency-value">900 Hz</span>
+          <div class="filter-grid">
+            <div class="filter-control">
+              <label for="filter-base-frequency">Filter Base</label>
+              <input id="filter-base-frequency" type="range" min="150" max="2600" value="900" />
+              <span id="filter-base-frequency-value">900 Hz</span>
             </div>
-            <div class="astronoise-control">
-              <label for="astronoise-resonance">Resonance</label>
-              <input id="astronoise-resonance" type="range" min="1" max="30" value="12" />
-              <span id="astronoise-resonance-value">12</span>
+            <div class="filter-control">
+              <label for="filter-resonance">Resonance</label>
+              <input id="filter-resonance" type="range" min="1" max="30" value="12" />
+              <span id="filter-resonance-value">12</span>
             </div>
-            <div class="astronoise-control">
-              <label for="astronoise-intensity">Intensity</label>
-              <input id="astronoise-intensity" type="range" min="0.1" max="1" step="0.01" value="0.7" />
-              <span id="astronoise-intensity-value">70%</span>
+            <div class="filter-control">
+              <label for="filter-intensity">Intensity</label>
+              <input id="filter-intensity" type="range" min="0.1" max="1" step="0.01" value="0.7" />
+              <span id="filter-intensity-value">70%</span>
             </div>
-            <div class="astronoise-control">
-              <label for="astronoise-glide-depth">Glide Depth</label>
-              <input id="astronoise-glide-depth" type="range" min="0" max="1" step="0.01" value="0.45" />
-              <span id="astronoise-glide-depth-value">45%</span>
+            <div class="filter-control">
+              <label for="filter-glide-depth">Glide Depth</label>
+              <input id="filter-glide-depth" type="range" min="0" max="1" step="0.01" value="0.45" />
+              <span id="filter-glide-depth-value">45%</span>
             </div>
-            <div class="astronoise-control">
-              <label for="astronoise-lfo-rate">LFO Rate</label>
-              <input id="astronoise-lfo-rate" type="range" min="0.2" max="4" step="0.1" value="1.2" />
-              <span id="astronoise-lfo-rate-value">1.2 Hz</span>
+            <div class="filter-control">
+              <label for="filter-lfo-rate">LFO Rate</label>
+              <input id="filter-lfo-rate" type="range" min="0.2" max="4" step="0.1" value="1.2" />
+              <span id="filter-lfo-rate-value">1.2 Hz</span>
             </div>
-            <div class="astronoise-control">
-              <label for="astronoise-shout-rate">Shout Rate</label>
-              <input id="astronoise-shout-rate" type="range" min="0.4" max="3" step="0.1" value="1.1" />
-              <span id="astronoise-shout-rate-value">1.1 /s</span>
+            <div class="filter-control">
+              <label for="filter-shout-rate">Shout Rate</label>
+              <input id="filter-shout-rate" type="range" min="0.4" max="3" step="0.1" value="1.1" />
+              <span id="filter-shout-rate-value">1.1 /s</span>
             </div>
           </div>
-          <div class="astronoise-actions">
-            <button class="download-link" id="astronoise-start">Awaken Astronoise</button>
-            <button class="download-link secondary" id="astronoise-shout">Tarzan Shout</button>
+          <div class="filter-actions">
+            <button class="download-link" id="filter-start">Awaken Filter</button>
+            <button class="download-link secondary" id="filter-burst">Trigger Burst</button>
           </div>
         </section>
       </main>
@@ -133,7 +133,7 @@
         <p>© 2026 Haze Anderson. Downloads cultivated with analog integrity.</p>
       </footer>
     </div>
-    <script src="assets/js/astronoise.js" defer></script>
+    <script src="assets/js/filter.js" defer></script>
     <script src="assets/js/main.js" defer></script>
   </body>
 </html>
