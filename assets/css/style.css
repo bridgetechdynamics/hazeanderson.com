@@ -136,6 +136,88 @@ main {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+.astronoise-panel {
+  background: linear-gradient(140deg, rgba(255, 140, 66, 0.24), rgba(7, 8, 21, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.astronoise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.astronoise-status {
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.astronoise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.astronoise-control {
+  background: rgba(2, 2, 9, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.astronoise-control label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+
+.astronoise-control span {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.astronoise-control input[type='range'] {
+  width: 100%;
+}
+
+.astronoise-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.astronoise-actions button {
+  border-radius: 999px;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.astronoise-actions .download-link.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 140, 66, 0.7);
+  color: var(--ink);
+}
+.astronoise-actions .download-link.secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .downloads-hero {
   display: flex;
   gap: 1.5rem;
