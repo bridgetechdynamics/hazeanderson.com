@@ -13,7 +13,7 @@ This project is a portfolio site for Haze Anderson with interactive synthesis to
 Open `index.html` in a browser. No build steps are required; the site is static and the scripts run on page load.
 
 ## Release modal
-The release modal on the home page is configured via `assets/js/release-modal.js`. The script consumes a `schedule` array of release entries, each containing the artwork, preview window, release date, take-down date, the listening party URL, and the album URL:
+The release modal on the home page is configured via `assets/js/release-modal.js`. The script consumes a `schedule` array of release entries, each containing the artwork, preview window, release date, take-down date, and album URL. `listeningParty` is optional:
 
 ```js
 {
@@ -24,15 +24,15 @@ The release modal on the home page is configured via `assets/js/release-modal.js
   releaseDate: '2026-08-05T20:00:00-05:00',
   previewStart: '2026-07-21T00:00:00-05:00',
   takeDown: '2026-09-01T00:00:00-05:00',
-  listeningParty: 'https://www.youtube.com/watch?v=...',
+  listeningParty: 'https://www.youtube.com/watch?v=...', // optional
   albumLink: 'https://hazeanderson.bandcamp.com/album/aurora-born'
 }
 ```
 
-The modal automatically appears when the current date is inside the preview/take-down window (`previewStart ≤ now < takeDown`). It shows a countdown to `releaseDate` (which stays at zero after the drop), presents the artwork/description, and displays one button whose href and label automatically flip from “Release party” to “Stream the album” once `releaseDate` passes. When the take-down date has been reached the modal hides itself and stops counting down.
+The modal automatically appears when the current date is inside the preview/take-down window (`previewStart ≤ now < takeDown`). It shows a countdown to `releaseDate` (which stays at zero after the drop), presents the artwork/description, and shows “Release party” before the drop when `listeningParty` is configured. Without a party, it shows a disabled “Stream the album” button instead. Once `releaseDate` passes, “Stream the album” becomes active when `albumLink` is configured. When the take-down date has been reached the modal hides itself and stops counting down.
 
 ### Activating the modal
-1. Add or edit an entry in the `schedule` array with the future release data (title, artwork path, release datetime, preview window start, and party link).
+1. Add or edit an entry in the `schedule` array with the future release data (title, artwork path, release datetime, preview window start, and album link). Add `listeningParty` only for releases that have a party.
 2. Make sure `previewStart` is before the current time but still before `releaseDate`, so visitors see the modal before the drop.
 3. The modal will automatically display on page load once the current time is within that window, thanks to the script’s automation logic.
 

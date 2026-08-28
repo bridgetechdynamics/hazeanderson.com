@@ -5,10 +5,9 @@
       title: 'Free Energy',
       description: 'New album from Haze Anderson. Price: Free as in Beer!',
       image: 'assets/images/free-energy.jpg',
-      releaseDate: '2026-08-31:00:00-05:00',
+      releaseDate: '2026-08-31T00:00:00-05:00',
       previewStart: '2026-08-26T00:00:00-05:00',
       takeDown: '2026-09-11T00:00:00-05:00',
-      listeningParty: 'https://hazeanderson.bandcamp.com/album/free-energy',
       albumLink: 'https://hazeanderson.bandcamp.com/album/free-energy'
     }
   ];
@@ -40,12 +39,27 @@
 
   const updateLinks = (isLive) => {
     if (!party) return;
-    if (isLive) {
-      party.href = release.albumLink;
-      party.textContent = 'Stream the album';
-    } else {
+
+    if (!isLive && release.listeningParty) {
       party.href = release.listeningParty;
       party.textContent = 'Release party';
+      party.classList.remove('disabled');
+      party.setAttribute('aria-disabled', 'false');
+      party.hidden = false;
+      party.style.display = '';
+      return;
+    }
+
+    if (release.albumLink) {
+      party.href = release.albumLink;
+      party.textContent = 'Stream the album';
+      party.hidden = false;
+      party.style.display = '';
+      party.classList.toggle('disabled', !isLive);
+      party.setAttribute('aria-disabled', String(!isLive));
+    } else {
+      party.hidden = true;
+      party.style.display = 'none';
     }
   };
 
@@ -98,5 +112,8 @@
 
   close.addEventListener('click', hide);
   backdrop.addEventListener('click', hide);
+  party.addEventListener('click', (event) => {
+    if (party.classList.contains('disabled')) event.preventDefault();
+  });
   show();
 })();
