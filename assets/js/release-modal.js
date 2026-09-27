@@ -1,14 +1,15 @@
 (function () {
   const schedule = [
     {
-      id: 'free-energy',
-      title: 'Free Energy',
-      description: 'New album from Haze Anderson. Price: Free as in Beer!',
-      image: 'assets/images/free-energy.jpg',
-      releaseDate: '2026-08-31T00:00:00-05:00',
-      previewStart: '2026-08-26T00:00:00-05:00',
-      takeDown: '2026-09-11T00:00:00-05:00',
-      albumLink: 'https://hazeanderson.bandcamp.com/album/free-energy'
+      id: 'plays-with-toys',
+      title: '... plays with toys',
+      description: 'New album from Haze Anderson ... plays with toys',
+      image: 'assets/images/plays-with-toys.png',
+      releaseDate: '2026-10-15T09:00:00-05:00',
+      previewStart: '2026-10-01T00:00:00-05:00',
+      takeDown: '2026-10-29T00:00:00-05:00',
+      //listeningParty: 'https://hazeanderson.bandcamp.com/album/plays-with-toys',
+      albumLink: 'https://hazeanderson.bandcamp.com/album/plays-with-toys'
     }
   ];
 
@@ -52,7 +53,7 @@
 
     if (release.albumLink) {
       party.href = release.albumLink;
-      party.textContent = 'Stream the album';
+      party.textContent = 'Purchase album';
       party.hidden = false;
       party.style.display = '';
       party.classList.toggle('disabled', !isLive);
