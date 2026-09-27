@@ -79,8 +79,32 @@ body {
   backdrop-filter: blur(12px);
 }
 
+.hero-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
 .hero-content {
   max-width: 880px;
+}
+
+.hero-media {
+  justify-self: end;
+  width: min(100%, 360px);
+}
+
+.hero-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
 .hero-title {
@@ -945,6 +969,15 @@ main {
 }
 
 @media (max-width: 640px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-media {
+    justify-self: start;
+    width: min(100%, 320px);
+  }
+
   .site-nav {
     flex-direction: column;
     gap: 1rem;
